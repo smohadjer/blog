@@ -10,7 +10,7 @@ export function getFileContent(filePath) {
 
 export default async (req, res) => {
     const postId = req.query.id;
-    const json = getFileContent('json/data.json');
+    const json = getFileContent('public/json/data.json');
     const jsonData = JSON.parse(json);
 
     const posts = postId ? jsonData.filter(item => item.id === req.query.id)
