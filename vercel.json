@@ -3,6 +3,10 @@
       {
         "source": "/:id*",
         "destination": "/api/blog"
+      },
+      {
+        "source": "/",
+        "destination": "/api/blog"
       }
     ],
     "cleanUrls": true
