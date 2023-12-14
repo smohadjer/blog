@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/:path*",
-        "destination": "api/blog"
+        "destination": "api/blog:path*"
       }
     ]
   }
