@@ -4,5 +4,7 @@
         "source": "/:id*",
         "destination": "/api/blog"
       }
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": true
   }
