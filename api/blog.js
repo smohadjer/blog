@@ -1,18 +1,15 @@
 import path from 'path';
 import fs from 'fs';
 
-export function getFileContent() {
-  const absolutePath = path.join(process.cwd(), 'public/json/data.json');
-  console.log(absolutePath);
+export function getFileContent(filePath) {
+  const absolutePath = path.join(process.cwd(), filePath);
   const fileContent = fs.readFileSync(absolutePath, 'utf8');
   return fileContent;
 };
 
-
-
 export default async (req, res) => {
     const postId = req.query.id;
-    const json = getFileContent();
+    const json = getFileContent('public/json/data.json');
 
     const jsonData = JSON.parse(json);
 
