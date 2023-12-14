@@ -1,11 +1,20 @@
 import path from 'path';
 import fs from 'fs';
+import Handlebars from 'handlebars';
 
-export function getFileContent(filename) {
+function getFileContent(filename) {
   const absolutePath = path.join(process.cwd(), 'public', 'json', filename);
   const fileContent = fs.readFileSync(absolutePath, 'utf8');
   return fileContent;
 };
+
+function getTemplate() {
+    const pathHbs = path.join(process.cwd(), 'public', 'blog.hbs');
+    const template = fs.readFileSync(pathHbs, 'utf8');
+    const compiledTemplate = Handlebars.compile(template);
+    return compiledTemplate;
+}
+
 
 export default async (req, res) => {
     const postId = req.query.id;
@@ -16,11 +25,13 @@ export default async (req, res) => {
     const posts = postId ? jsonData.filter(item => item.id === req.query.id)
         : jsonData;
 
-    let markup = '';
+    console.log(posts);
 
-    posts.forEach((post) => {
-        markup += `<div class="post"><h1>${post.title}</h1></div>`;
-    })
+    const compiledTemplate = getTemplate();
+    const markup = compiledTemplate({
+        posts: posts
+    });
+    console.log(markup)
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.end(markup);

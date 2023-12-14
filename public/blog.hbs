@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Blog</title>
+        <meta name="description" content="Blog">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main>
+            {{#each posts}}
+                <article id="{{this.id}}" class="post">
+                    {{#if this.date}}
+                        <time datetime="{{this.data}}">{{this.date}}</time>
+                    {{/if}}
+                    <h1>{{this.title}}</h1>
+                    {{#if this.tags}}
+                        <div class="tags">
+                            {{#each this.tags}}
+                                <span>{{this}}</span>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    <div class="content">
+                        {{this.content}}
+                    </div>
+                </article>
+            {{/each}}
+        </main>
+        <script>
+            console.log('Hello World');
+        </script>
+    </body>
+</html>
+

@@ -1,18 +1,37 @@
 [
   {
     "id": "1",
-    "title": "My first blog post"
+    "date": "2023-11-17",
+    "title": "Lorventore esse consectolor",
+    "slug": "domparser",
+    "tags": ["css", "javascript"],
+    "content": "Inventore esse consectetur, perferendis laboriosam sapiente reprehenderit numquam iusto. Aliquid voluptates et mollitia!"
   },
   {
     "id": "2",
-    "title": "My second blog post"
+    "date": "2023-11-17",
+    "title": "Aliquid voluptates et mollitia",
+    "slug": "domparser",
+    "tag": ["javascript", "typescript"],
+    "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iste, error officiis quibusdam eius qui sint aperiam inventore esse consectetur, perferendis laboriosam sapiente reprehenderit numquam iusto. Aliquid voluptates et mollitia!"
   },
   {
     "id": "3",
-    "title": "My third blog post"
+    "date": "2023-11-17",
+    "title": "Lorem ipsum dolor",
+    "slug": "domparser",
+    "tag": "javascript",
+    "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iste, error officiis quibusdam eius qui sint aperiam inventore esse consectetur, perferendis laboriosam sapiente reprehenderit numquam iusto. Aliquid voluptates et mollitia!"
   },
   {
     "id": "4",
-    "title": "My fourth blog post"
+    "date": "2023-11-17",
+    "title": "Lorem ipsum dolor",
+    "slug": "domparser",
+    "tag": "javascript",
+    "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iste, error officiis quibusdam eius qui sint aperiam inventore esse consectetur, perferendis laboriosam sapiente reprehenderit numquam iusto. Aliquid voluptates et mollitia!"
+
   }
 ]
+
+

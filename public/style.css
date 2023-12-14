@@ -1,0 +1,154 @@
+body {
+  font-family: arial, helvetica, veradana, sans-serif;
+  font-size: 18px;
+}
+
+.blog a {
+  text-decoration: none;
+}
+
+.blog .back {
+  font-size: smaller;
+}
+
+@media (min-width: 1024px) {
+  main.blog article {
+      margin: 2em auto 0;
+      max-width: 80ch;
+  }
+}
+
+.post {
+    border-bottom: solid 1px #ccc;
+    padding: 0 0 1.5em;
+    margin: 0 15px 1em;
+
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .post {
+      margin: 0 0 1em;
+    }
+  }
+
+  .filters {
+    margin: 0 15px 2em;
+    background: #eee;
+    padding: 2em 1em;
+  }
+
+  @media (min-width: 1024px) {
+    .filters {
+      margin: 0 0 3em;
+    }
+  }
+
+  .filters select {
+    padding: 5px;
+    border: solid 1px white;
+    font-size: 18px;
+  }
+
+  .post.hidden {
+    display: none;
+  }
+
+  .post:last-child {
+    border: 0;
+    padding-bottom: 0;
+  }
+
+  .post h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  .post .responsive {
+    width: 100%;
+  }
+
+  .post ul {
+    margin-left: 17px;
+    padding-left: 0;
+    margin-top: 0.5em;
+  }
+
+  .post ol {
+    padding-left: 0;
+    list-style: inside decimal;
+  }
+
+  .post ol li + li {
+    margin-top: 1em;
+  }
+
+  .post .tags {
+    margin: 5px 0;
+  }
+
+  .post .tags span {
+    padding: 5px 15px;
+    background: #888;
+    border-radius: 15px;
+    font-size: smaller;
+    color: white;
+  }
+
+  .post time {
+    display: inline-block;
+    font-size: smaller;
+    font-style: italic;
+  }
+
+  .post time::before {
+    content: "Published on ";
+  }
+
+  .post code {
+    background: #f0f0f0;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 0.25em;
+    border-radius: 5px;
+  }
+
+  .post pre {
+    max-width: 100ch;
+    background: #f4f4f4;
+    color: #333;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    overflow: auto;
+    padding: 1em;
+    display: block;
+    word-wrap: break-word;
+  }
+  .post pre code {
+    background: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .post table {
+    font-size: smaller;
+    border-spacing: 0;
+    margin-top: 1em;
+  }
+  .post tr:nth-child(odd) {
+    background: #eee;
+  }
+  .post td {
+    vertical-align: top;
+    padding: 5px;
+  }
+  .post td:first-child {
+    padding-right: 20px;
+    min-width: 160px;
+  }
