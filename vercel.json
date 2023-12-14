@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "/:id*",
+        "source": "/:slug*",
         "destination": "/api/blog"
       },
       {

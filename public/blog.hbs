@@ -10,7 +10,7 @@
     <body>
         <main>
             {{#each posts}}
-                <article id="{{this.id}}" class="post">
+                <article id="{{this._id}}" class="post">
                     {{#if this.date}}
                         <time datetime="{{this.data}}">{{this.date}}</time>
                     {{/if}}
@@ -23,7 +23,7 @@
                         </div>
                     {{/if}}
                     <div class="content">
-                        {{this.content}}
+                        {{{this.content}}}
                     </div>
                 </article>
             {{/each}}
