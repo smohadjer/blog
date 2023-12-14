@@ -2,15 +2,16 @@ import path from 'path';
 import fs from 'fs';
 
 export function getFileContent(filePath) {
-  //const absolutePath = path.join(process.cwd(), filePath);
-  console.log(process.cwd());
-  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const absolutePath = path.join(process.cwd(), 'public', filePath);
+  console.log(absolutePath);
+  const fileContent = fs.readFileSync(absolutePath, 'utf8');
   return fileContent;
 };
 
 export default async (req, res) => {
     const postId = req.query.id;
-    const json = getFileContent('api/_json/data.json');
+    const json = getFileContent('json/data.json');
+
     const jsonData = JSON.parse(json);
 
     const posts = postId ? jsonData.filter(item => item.id === req.query.id)
