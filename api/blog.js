@@ -18,18 +18,28 @@ export default async (req, res) => {
         const database = client.db('blog');
         const collection = database.collection('demo-posts');
         const slug = req.query.slug;
-        const query = (slug && slug.length > 0) ? {'slug': slug} : {};
 
         if (req.method === 'GET') {
+            const query = (slug && slug.length > 0) ? {'slug': slug} : {};
             const data = await collection.find(query).toArray();
-            data.map((item) => {
-                item.content = marked.parse(item.content);
-            });
+
+            if (slug && slug.length > 0) {
+                data.map((item) => {
+                    item.content = marked.parse(item.content);
+                });
+            } else {
+                data.map((item) => {
+                    const link = `<p><a href="/${item.slug}">Read More</a></p>`;
+                    item.content = item.summary
+                        ? marked.parse(item.summary) + link
+                        : link;
+                });
+            }
+
             const compiledTemplate = getTemplate();
             const markup = compiledTemplate({
                 posts: data
             });
-
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
             res.end(markup);
         }
