@@ -5,7 +5,7 @@
         <title>Blog</title>
         <meta name="description" content="Blog">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
         <main>
@@ -18,7 +18,7 @@
                     {{#if this.tags}}
                         <div class="tags">
                             {{#each this.tags}}
-                                <span>{{this}}</span>
+                                <a href="/tag/{{this}}">{{this}}</a>
                             {{/each}}
                         </div>
                     {{/if}}

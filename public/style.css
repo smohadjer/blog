@@ -90,8 +90,8 @@ body {
     margin: 5px 0;
   }
 
-  .post .tags span {
-    padding: 5px 15px;
+  .post .tags a {
+    padding: 3px 10px 8px;
     background: #888;
     border-radius: 15px;
     font-size: smaller;

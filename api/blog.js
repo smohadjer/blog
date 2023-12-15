@@ -1,6 +1,6 @@
 import client from './_db.js';
-import { ObjectId } from 'mongodb';
 import getPosts from './_getPosts.js';
+import insertPost from './_insertPost.js';
 
 export default async (req, res) => {
     try {
@@ -9,27 +9,33 @@ export default async (req, res) => {
         const collection = database.collection('demo-posts');
 
         if (req.method === 'GET') {
-            const markup = await getPosts(req, collection);
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.end(markup);
+            console.log(req.query.tag, req.query.slug);
+            const posts = await getPosts(req, collection);
+
+            if (req.query.response === 'json') {
+                res.setHeader('Content-Type', 'application/json');
+                res.json(posts);
+            } else {
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                res.end(posts);
+            }
         }
 
         if (req.method === 'POST') {
-            // const obj = await insertPost(posts, req);
-            // if (obj.id) {
-            //   // create or update blog files on github using github API
-            //   await github(obj.doc, obj.id);
-
+            const obj = await insertPost(req, collection);
+            if (obj.id) {
             //   res.status(200).send({
             //     message: 'Post inserted!',
             //     post_id: obj.id
             //   });
-            // } else {
-            //   res.status(500).send({
-            //     error: 500,
-            //     message: obj.error || 'Invalid data!'
-            //   });
-            // }
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                res.send(`<p>Post successful! Post ID: ${obj.id}<br><a href="/${obj.doc.slug}">${obj.doc.title}</a>`);
+            } else {
+              res.status(500).send({
+                error: 500,
+                message: obj.error || 'Invalid data!'
+              });
+            }
         }
     } catch (e) {
         console.error(e);
