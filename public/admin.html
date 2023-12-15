@@ -9,25 +9,25 @@
 <body>
     <main>
         <article>
+            <p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis">Markdown Cheatsheet</a></p>
+
             <button id="new-post">Reset Form</button>
+
             <select>
                 <option value="">Select post to edit...</option>
             </select>
 
-            <p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis">Markdown Cheatsheet</a></p>
-
             <form action="/api/blog" method="POST">
-                <p>Fields marked with <strong>*</strong> are required.</p>
                 <div class="row row--two-columns required">
-                    <label for="date">Date</label>
-                    <input required type="date" name="date">
+                    <label for="date">Date: *</label>
+                    <input required type="date" name="date" pattern="\d{4}-\d{2}-\d{2}">
                 </div>
                 <div class="row row--two-columns required">
-                    <label for="title">Title</label>
+                    <label for="title">Title: *</label>
                     <input required name="title">
                 </div>
                 <div class="row row--two-columns">
-                    <label for="tags">Tags</label>
+                    <label for="tags">Tags:</label>
                     <input list="tags" name="tags" placeholder="tag1, tag2, tag3">
                     <datalist id="tags">
                         <option value="authentication">authentication</option>
@@ -41,74 +41,85 @@
                     </datalist>
                 </div>
                 <div class="row row--two-columns required">
-                    <label for="slug">Slug</label>
+                    <label for="slug">Slug: *</label>
                     <input name="slug" placeholder="my-first-post">
                 </div>
                 <div class="row row--two-columns">
-                    <label for="content">Summay</label>
-                    <textarea required rows="5" cols="50" name="summary" placeholder="If your post is long add a summay to show on blog home page instead of the whole post."></textarea>
+                    <label for="content">Summay:</label>
+                    <textarea rows="5" cols="50" name="summary" placeholder="If your post is long add a summay to show on blog home page instead of the whole post."></textarea>
                 </div>
                 <div class="row row--two-columns required">
-                    <label for="content">Content</label>
-                    <textarea required rows="10" cols="50" name="content" placeholder="You can use Markdown"></textarea>
+                    <label for="content">Content: *</label>
+                    <textarea required rows="10" cols="50" name="content" placeholder="You can use Markdown here"></textarea>
                 </div>
-                <button>Post</button>
+                <button>Submit</button>
             </form>
-
-            <script type="module">
-                try {
-                    const response = await fetch('/api/blog?response=json');
-                    const posts = await response.json();
-                    const form = document.querySelector('form');
-                    init(posts, form);
-                } catch (err) {
-                    console.log(err);
-                }
-
-                function init(posts, form) {
-                    populateSelect(posts);
-                    document.querySelector('#new-post').addEventListener('click', () => {
-                        resetForm(form);
-                    });
-                    document.querySelector('select').addEventListener('change', (e) => {
-                        resetForm(form);
-                        populateForm(e.target.value, form, posts);
-                    });
-                }
-
-                function populateSelect(posts) {
-                    let options = '';
-                    posts.forEach((doc) => {
-                        options += `<option value=${doc._id}>${doc.title}</option>`;
-                    });
-                    const optionsDOM = new DOMParser().parseFromString(options, 'text/html').body.children;
-                    document.querySelector('select').append(...optionsDOM);
-                }
-
-            function resetForm(form) {
-                const hiddenField = form.querySelector('input[type=hidden]');
-                if (hiddenField) {
-                    hiddenField.remove();
-                }
-                form.reset();
-            }
-
-            function populateForm(post_id, form, posts) {
-                if (post_id.length === 0) return;
-
-                const post = posts.find(post => post._id === post_id);
-                const formFields = form.querySelectorAll('input, textarea');
-                formFields.forEach((input) => {
-                    input.value = post[input.getAttribute('name')];
-                });
-
-                // add a hidden input field for id
-                const input = `<input type="hidden" name="post_id" value="${post_id}">`
-                const inputElm = new DOMParser().parseFromString(input, 'text/html').body.firstChild;
-                form.append(inputElm);
-            }
-            </script>
         </article>
     </main>
+
+    <script>
+        init(document.querySelector('form'));
+
+        function init(form) {
+            populateSelect(form);
+
+            // set date to current date
+            setDate(form);
+
+            document.querySelector('#new-post').addEventListener('click', () => {
+                resetForm(form);
+            });
+        }
+
+        function setDate(form) {
+            const dateField = form.querySelector('input[name=date]');
+            const today = new Date().toISOString().split('T')[0];
+            dateField.value = today;
+        }
+
+        async function populateSelect(form) {
+            const select = document.querySelector('select');
+            try {
+                const response = await fetch('/api/blog?response=json');
+                const posts = await response.json();
+                let options = '';
+                posts.forEach((doc) => {
+                    options += `<option value=${doc._id}>${doc.title}</option>`;
+                });
+                const optionsDOM = new DOMParser().parseFromString(options, 'text/html').body.children;
+                select.append(...optionsDOM);
+                select.addEventListener('change', (e) => {
+                    resetForm(form);
+                    populateForm(e.target.value, form, posts);
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        function resetForm(form) {
+            const hiddenField = form.querySelector('input[type=hidden]');
+            if (hiddenField) {
+                hiddenField.remove();
+            }
+            form.reset();
+            setDate(form);
+        }
+
+        function populateForm(post_id, form, posts) {
+            if (post_id.length === 0) return;
+
+            const post = posts.find(post => post._id === post_id);
+            const formFields = form.querySelectorAll('input, textarea');
+            formFields.forEach((input) => {
+                input.value = post[input.getAttribute('name')];
+            });
+
+            // add a hidden input field for id
+            const input = `<input type="hidden" name="post_id" value="${post_id}">`
+            const inputElm = new DOMParser().parseFromString(input, 'text/html').body.firstChild;
+            form.append(inputElm);
+        }
+    </script>
 </body>
 </html>

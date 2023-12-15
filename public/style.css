@@ -152,3 +152,16 @@ body {
     padding-right: 20px;
     min-width: 160px;
   }
+
+  .row--two-columns {
+    margin-top: 0.5em;
+  }
+
+  textarea {
+    vertical-align: top;
+  }
+
+.row--two-columns label {
+  min-width: 120px;
+  display: inline-block;
+}
