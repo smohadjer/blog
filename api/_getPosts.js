@@ -18,7 +18,7 @@ export default async (req, collection) => {
         ? {slug: slug}
         : tag ? {tags: tag} : {};
 
-    const data = await collection.find(query).toArray();
+    const data = await collection.find(query).sort({'date': -1}).toArray();
 
     if (req.query.response === 'json') {
         return data;
