@@ -47,7 +47,11 @@ select, option, input, textarea {
   font-size: 18px;
   display: block;
   width: 100%;
+  box-sizing: border-box;
   border: solid 1px #ccc;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-box-sizing: border-box;
 
   @media (min-width: 768px) {
     width: auto;
@@ -60,7 +64,6 @@ form {
 
   input, textarea {
     padding: 0.25em 0;
-    box-sizing: border-box;
 
     @media (min-width: 768px) {
       padding: 0.25em;
