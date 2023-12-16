@@ -162,6 +162,10 @@ article {
   min-width: 160px;
 }
 
+select, option, input, textarea {
+  font-size: 16px;
+}
+
 form {
   margin: 1em 0;
 
