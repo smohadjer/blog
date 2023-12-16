@@ -9,24 +9,36 @@
     </head>
     <body>
         <main>
-            {{#each posts}}
-                <article id="{{this._id}}" class="post">
-                    {{#if this.date}}
-                        <time datetime="{{this.data}}">{{this.date}}</time>
-                    {{/if}}
-                    <h1>{{this.title}}</h1>
-                    {{#if this.tags}}
-                        <div class="tags">
-                            {{#each this.tags}}
-                                <a href="/tag/{{this}}">{{this}}</a>
-                            {{/each}}
+            <header>
+                <div class="logo">Blog</div>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/admin">Admin</a>
+                </nav>
+            </header>
+            <section>
+                {{#each posts}}
+                    <article id="{{this._id}}" class="post">
+                        {{#if this.date}}
+                            <time datetime="{{this.data}}">{{this.date}}</time>
+                        {{/if}}
+                        <h1>{{this.title}}</h1>
+                        {{#if this.tags}}
+                            <div class="tags">
+                                {{#each this.tags}}
+                                    <a href="/tag/{{this}}">{{this}}</a>
+                                {{/each}}
+                            </div>
+                        {{/if}}
+                        <div class="content">
+                            {{{this.content}}}
                         </div>
-                    {{/if}}
-                    <div class="content">
-                        {{{this.content}}}
-                    </div>
-                </article>
-            {{/each}}
+                    </article>
+                {{/each}}
+            </section>
+            <footer>
+                &copy; Saeid Mohadjer 2023
+            </footer>
         </main>
         <script>
             console.log('Hello World');

@@ -8,15 +8,20 @@
 </head>
 <body>
     <main>
-        <article>
-            <p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis">Markdown Cheatsheet</a></p>
-
-            <button id="new-post">Reset Form</button>
-
-            <select>
-                <option value="">Select post to edit...</option>
-            </select>
-
+        <header>
+            <div class="logo">Blog</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/admin">Admin</a>
+            </nav>
+        </header>
+        <section>
+            <div class="edit">
+                <select>
+                    <option value="">Select post to edit...</option>
+                </select>
+                <span class="loading">Fetching list of blog articles...</span>
+            </div>
             <form action="/api/blog" method="POST">
                 <div class="row row--two-columns required">
                     <label for="date">Date: *</label>
@@ -52,9 +57,19 @@
                     <label for="content">Content: *</label>
                     <textarea required rows="10" cols="50" name="content" placeholder="You can use Markdown here"></textarea>
                 </div>
-                <button>Submit</button>
+                <div class="row row--two-columns required">
+                    <span></span>
+                    <span>
+                        <button>Submit</button>
+                        <input type="reset">
+                    </span>
+                </div>
             </form>
-        </article>
+        </section>
+        <footer>
+            <span>&copy; Saeid Mohadjer 2023</span>
+            <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis">Markdown Cheatsheet</a>
+        </footer>
     </main>
     <script src="/admin.js"></script>
 </body>
