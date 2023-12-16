@@ -51,7 +51,7 @@ select, option, input, textarea {
 
   @media (min-width: 768px) {
     width: auto;
-    display: initial;
+    display:unset;
   }
 }
 
@@ -59,8 +59,12 @@ form {
   margin: 1em 0;
 
   input, textarea {
-    padding: 0.25em;
+    padding: 0.25em 0;
     box-sizing: border-box;
+
+    @media (min-width: 768px) {
+      padding: 0.25em;
+    }
   }
 
   & button,
