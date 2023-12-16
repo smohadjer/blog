@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Blog admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
     <main>
@@ -17,7 +18,7 @@
         </header>
         <section>
             <div class="edit">
-                <select>
+                <select disabled>
                     <option value="">Select post to edit...</option>
                 </select>
                 <span class="loading">Fetching list of blog articles...</span>
@@ -33,17 +34,7 @@
                 </div>
                 <div class="row row--two-columns">
                     <label for="tags">Tags:</label>
-                    <input list="tags" name="tags" placeholder="tag1, tag2, tag3">
-                    <datalist id="tags">
-                        <option value="authentication">authentication</option>
-                        <option value="javascript">javascript</option>
-                        <option value="typescript">typescript</option>
-                        <option value="react">react</option>
-                        <option value="mac">mac</option>
-                        <option value="node.js">node.js</option>
-                        <option value="tools">tools</option>
-                        <option value="css">css</option>
-                    </datalist>
+                    <input list="tags" name="tags" placeholder="tag1, tag2">
                 </div>
                 <div class="row row--two-columns required">
                     <label for="slug">Slug: *</label>
@@ -71,6 +62,6 @@
             <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis">Markdown Cheatsheet</a>
         </footer>
     </main>
-    <script src="/admin.js"></script>
+    <script src="/js/admin.js"></script>
 </body>
 </html>

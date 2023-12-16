@@ -1,35 +1,7 @@
 body {
   font-family: arial, helvetica, veradana, sans-serif;
   font-size: 18px;
-}
-
-.edit {
-  margin: 1em 0;
-
-  & select {
-    padding: 0.5em;
-    background: #eee;
-  }
-}
-
-.loading::before {
-  content: ' ';
-  width: 1em;
-  height: 1em;
-  border: 0.2em solid #999;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: loadingspin 1s linear infinite;
-  display: inline-block;
-  margin-left: 1em;
-  vertical-align: middle;
-  margin-right: 0.5em;
-}
-
-@keyframes loadingspin {
-  100% {
-      transform: rotate(360deg)
-  }
+  margin: 0;
 }
 
 header {
@@ -160,39 +132,4 @@ article {
 .post td:first-child {
   padding-right: 20px;
   min-width: 160px;
-}
-
-select, option, input, textarea {
-  font-size: 16px;
-}
-
-form {
-  margin: 1em 0;
-
-  & button,
-  & input[type=reset] {
-    font-size: larger;
-    padding: 0.5em 1em;
-    border: 0;
-    cursor: pointer;
-    margin: 1em 0.5em 1em  0;
-  }
-
-  & input[type=reset] {
-    background: red;
-    color: white;
-  }
-}
-
-.row {
-  margin-top: 0.5em;
-}
-
-textarea {
-  vertical-align: top;
-}
-
-.row--two-columns > *:first-child {
-  min-width: 120px;
-  display: inline-block;
 }

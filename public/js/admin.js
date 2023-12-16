@@ -32,6 +32,7 @@ async function populateSelect(form) {
         });
         const optionsDOM = new DOMParser().parseFromString(options, 'text/html').body.children;
         select.append(...optionsDOM);
+        select.removeAttribute('disabled');
         document.querySelector('.loading').remove();
         select.addEventListener('change', (e) => {
             resetForm(form);
@@ -43,7 +44,6 @@ async function populateSelect(form) {
 }
 
 function resetForm(form) {
-    console.log(form);
     const hiddenField = form.querySelector('input[type=hidden]');
     if (hiddenField) {
         hiddenField.remove();

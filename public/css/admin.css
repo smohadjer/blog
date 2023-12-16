@@ -1,0 +1,106 @@
+@keyframes loadingspin {
+  100% {
+      transform: rotate(360deg)
+  }
+}
+
+.edit {
+    margin: 1em 0;
+
+    & select {
+      padding: 0.5em;
+      width: 100%;
+
+      @media (min-width: 768px) {
+        width: auto;
+        display: initial;
+      }
+    }
+
+    & .loading {
+      margin-top: 0.5em;
+      display: block;
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+        margin-left: 0.5em;
+        display: initial;
+      }
+    }
+
+    .loading::before {
+      content: ' ';
+      width: 1em;
+      height: 1em;
+      border: 0.2em solid #999;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: loadingspin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.5em;
+    }
+}
+
+
+select, option, input, textarea {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  border: solid 1px #ccc;
+
+  @media (min-width: 768px) {
+    width: auto;
+    display: initial;
+  }
+}
+
+form {
+  margin: 1em 0;
+
+  input, textarea {
+    padding: 0.25em;
+    box-sizing: border-box;
+  }
+
+  & button,
+  & input[type=reset] {
+    font-size: larger;
+    padding: 0.5em 1em;
+    border: 0;
+    cursor: pointer;
+  }
+
+  & input[type=reset] {
+    background: red;
+    color: white;
+    width: auto;
+    display: initial;
+    margin-left: 0.5em;
+  }
+}
+
+.row {
+  margin-top: 1em;
+
+  @media (min-width: 768px) {
+    margin-top: 0.5em;
+  }
+}
+
+  textarea {
+    vertical-align: top;
+  }
+
+.row--two-columns > *:first-child {
+  display: block;
+
+  @media (min-width: 768px) {
+    min-width: 120px;
+    display: inline-block;
+  }
+}
+
+
+
+
