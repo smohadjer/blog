@@ -13,7 +13,7 @@ export default async (req, collection) => {
     }
 
     if (req.body.tags) {
-        const tagsString = req.body.tags.replaceAll(' ', '');
+        const tagsString = req.body.tags.replaceAll(' ', '').toLowerCase();
         document.tags = tagsString.split(',');
     }
 

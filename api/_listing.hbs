@@ -22,7 +22,7 @@
                         {{#if this.date}}
                             <time datetime="{{this.data}}">{{this.date}}</time>
                         {{/if}}
-                        <h1>{{this.title}}</h1>
+                        <h1><a href="/{{this.slug}}">{{this.title}}</a></h1>
                         {{#if this.tags}}
                             <div class="tags">
                                 {{#each this.tags}}
