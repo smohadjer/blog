@@ -5,6 +5,7 @@ import Handlebars from 'handlebars';
 
 function getTemplate(templateName) {
     const pathHbs = path.join(process.cwd(), 'api', templateName);
+    console.log(pathHbs);
     const template = fs.readFileSync(pathHbs, 'utf8');
     const compiledTemplate = Handlebars.compile(template);
     return compiledTemplate;
@@ -29,7 +30,6 @@ export default async (req, collection) => {
         data.map((item) => {
             item.content = marked.parse(item.content);
         });
-        console.log(data)
 
         const compiledTemplate = getTemplate('_detail.hbs');
         const markup = compiledTemplate(data[0]);
