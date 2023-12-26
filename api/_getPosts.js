@@ -37,14 +37,8 @@ export default async (req, collection) => {
     // listing page
     } else {
         data.map((item) => {
-            // if post has summary instead of content show summary
-            // and a link to detail page
-            if (item.summary) {
-                const link = `<p><a href="/${item.slug}">Read More</a></p>`;
-                item.content = marked.parse(item.summary) + link;
-            } else {
-                item.content = marked.parse(item.content);
-            }
+            const markdown = item.summary ? item.summary : item.content;
+            item.content =  marked.parse(markdown);
         });
 
         const compiledTemplate = getTemplate('listing.hbs');
