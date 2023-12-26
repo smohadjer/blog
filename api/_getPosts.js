@@ -3,7 +3,8 @@ import path from 'path';
 import fs from 'fs';
 import Handlebars from 'handlebars';
 
-function getTemplate(pathHbs) {
+function getTemplate(filename) {
+    const pathHbs = path.join(process.cwd(), 'templates', filename);
     console.log('template: ', pathHbs);
     const template = fs.readFileSync(pathHbs, 'utf8');
     const compiledTemplate = Handlebars.compile(template);
@@ -31,8 +32,7 @@ export default async (req, collection) => {
         });
 
         const filename = 'detail.hbs';
-        const pathHbs = path.join(process.cwd(), 'templates', filename);
-        const compiledTemplate = getTemplate(pathHbs);
+        const compiledTemplate = getTemplate(filename);
         const markup = compiledTemplate(data[0]);
         return markup;
     // listing page
@@ -49,8 +49,7 @@ export default async (req, collection) => {
         });
 
         const filename = 'listing.hbs';
-        const pathHbs = path.join(process.cwd(), 'templates', filename);
-        const compiledTemplate = getTemplate(pathHbs);
+        const compiledTemplate = getTemplate(filename);
         const markup = compiledTemplate({
             posts: data
         });
