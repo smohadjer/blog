@@ -9,7 +9,6 @@ export default async (req, res) => {
         const collection = database.collection('demo-posts');
 
         if (req.method === 'GET') {
-            console.log(req.query.tag, req.query.slug);
             const posts = await getPosts(req, collection);
 
             if (req.query.response === 'json') {

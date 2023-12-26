@@ -4,7 +4,7 @@ import fs from 'fs';
 import Handlebars from 'handlebars';
 
 function getTemplate(pathHbs) {
-    console.log(pathHbs);
+    console.log('template: ', pathHbs);
     const template = fs.readFileSync(pathHbs, 'utf8');
     const compiledTemplate = Handlebars.compile(template);
     return compiledTemplate;

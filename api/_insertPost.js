@@ -19,9 +19,7 @@ export default async (req, collection) => {
 
     if (req.body.post_id) {
       const query = {_id: new ObjectId(req.body.post_id)};
-      console.log('replacing doc in db');
       const result = await collection.replaceOne(query, document);
-      console.log(result);
       return {
         id: req.body.post_id,
         doc: document
