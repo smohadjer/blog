@@ -30,7 +30,8 @@ export default async (req, collection) => {
             item.content = marked.parse(item.content);
         });
 
-        const pathHbs = path.join(process.cwd(), 'templates', 'detail.hbs');
+        const filename = 'detail.hbs';
+        const pathHbs = path.join(process.cwd(), 'templates', filename);
         const compiledTemplate = getTemplate(pathHbs);
         const markup = compiledTemplate(data[0]);
         return markup;
@@ -47,7 +48,8 @@ export default async (req, collection) => {
             }
         });
 
-        const pathHbs = path.join(process.cwd(), 'templates', 'listing.hbs');
+        const filename = 'listing.hbs';
+        const pathHbs = path.join(process.cwd(), 'templates', filename);
         const compiledTemplate = getTemplate(pathHbs);
         const markup = compiledTemplate({
             posts: data

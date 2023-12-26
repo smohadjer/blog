@@ -70,6 +70,17 @@ form {
     }
   }
 
+  @media (min-width: 768px) {
+    input[name="title"],
+    input[name="slug"] {
+      min-width: 500px;
+    }
+
+    input[name="tags"] {
+      min-width: 300px;
+    }
+  }
+
   & button,
   & input[type=reset] {
     font-size: larger;
