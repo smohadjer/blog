@@ -31,8 +31,7 @@ export default async (req, collection) => {
             item.content = marked.parse(item.content);
         });
 
-        const filename = 'detail.hbs';
-        const compiledTemplate = getTemplate(filename);
+        const compiledTemplate = getTemplate('detail.hbs');
         const markup = compiledTemplate(data[0]);
         return markup;
     // listing page
@@ -48,8 +47,7 @@ export default async (req, collection) => {
             }
         });
 
-        const filename = 'listing.hbs';
-        const compiledTemplate = getTemplate(filename);
+        const compiledTemplate = getTemplate('listing.hbs');
         const markup = compiledTemplate({
             posts: data
         });
