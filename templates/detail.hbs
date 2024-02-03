@@ -9,12 +9,7 @@
     </head>
     <body>
         <main>
-            <header>
-                <div class="logo"><a href="/">Blog</a></div>
-                <nav>
-                    <a href="/admin">Admin</a>
-                </nav>
-            </header>
+            {{> header }}
             <section>
                 <article id="{{this._id}}" class="post">
                     {{#if date}}
@@ -33,9 +28,7 @@
                     </div>
                 </article>
             </section>
-            <footer>
-                &copy; Saeid Mohadjer 2023
-            </footer>
+            {{> footer }}
         </main>
         <script>
             console.log('Hello World');
