@@ -43,7 +43,7 @@
 }
 
 
-select, option, input, textarea {
+select, option, input:not([type]=checkbox), textarea {
   font-size: 18px;
   display: block;
   width: 100%;
@@ -95,6 +95,7 @@ form {
     width: auto;
     display: initial;
     margin-left: 0.5em;
+    min-width: unset !important;
   }
 }
 
@@ -117,6 +118,11 @@ form {
     min-width: 120px;
     display: inline-block;
   }
+}
+
+.row--two-columns :is(input)[type=checkbox] {
+  width: auto;
+  min-width: unset;
 }
 
 

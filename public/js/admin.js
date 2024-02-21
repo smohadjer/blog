@@ -24,7 +24,7 @@ function getDateAsIsoString(date) {
 async function populateSelect(form) {
     const select = document.querySelector('select');
     try {
-        const response = await fetch('/api/blog?response=json');
+        const response = await fetch('/api/blog?response=json&permission=all');
         const posts = await response.json();
         let options = '';
         posts.forEach((doc) => {
@@ -63,7 +63,11 @@ function populateForm(post_id, form, posts) {
     formFields.forEach((input) => {
         const fieldName = input.getAttribute('name');
         if (post[fieldName]) {
-            input.value = post[fieldName];
+            if (input.getAttribute('type') === 'checkbox') {
+                input.checked = true;
+            } else {
+                input.value = post[fieldName];
+            }
         }
     });
 

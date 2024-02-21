@@ -22,10 +22,23 @@ function getTemplate(filename) {
 export default async (req, collection) => {
     const slug = req.query.slug;
     const tag = req.query.tag;
+    const permission = req.query.permission;
+    const query = {};
 
-    const query = slug
-        ? {slug: slug}
-        : tag ? {tags: tag} : {};
+    if (slug) {
+        query.slug = slug;
+    } else if (tag) {
+        query.tags = tag;
+        if (!permission) {
+            query.permission = { $ne: 'private' }
+        }
+    } else if (!permission) {
+        /* if no permission parameter is sent with request we only show
+        posts that are not marked as private */
+        query.permission = { $ne: 'private' }
+    }
+
+    console.log(query);
 
     const data = await collection.find(query).sort({'date': -1}).toArray();
 
