@@ -8,15 +8,23 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <main>
-            {{> header }}
-            <section>
+        {{> header }}
+        <div class="flex">
+            <aside>
+                <h1>Filter by tags</h1>
+                <div class="tags">
+                    {{#each tags}}
+                        <a href="/tag/{{this}}">{{this}}</a>
+                    {{/each}}
+                </div>
+            </aside>
+            <main>
                 {{#each posts}}
                     <article id="{{this._id}}" class="post">
                         {{#if this.date}}
                             <time datetime="{{this.data}}">{{this.date}}</time>
                         {{/if}}
-                        <h1><a href="/{{this.slug}}">{{this.title}}</a></h1>
+                        <h2><a href="/{{this.slug}}">{{this.title}}</a></h2>
                         {{#if this.tags}}
                             <div class="tags">
                                 {{#each this.tags}}
@@ -29,12 +37,9 @@
                         </div>
                     </article>
                 {{/each}}
-            </section>
-            {{> footer }}
-        </main>
-        <script>
-            console.log('Hello World');
-        </script>
+            </main>
+        </div>
+        {{> footer }}
     </body>
 </html>
 

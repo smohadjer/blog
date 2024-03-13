@@ -1,4 +1,6 @@
+
 body {
+  --primary-color: #06c;
   font-family: arial, helvetica, veradana, sans-serif;
   font-size: 18px;
   margin: 0;
@@ -26,23 +28,58 @@ footer {
   justify-content: space-between;
 }
 
-main > section {
+.flex {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: unset;
+    gap: 1em;
+  }
+}
+
+main {
+  padding: 1em;
+}
+
+aside {
+  flex-basis: 15vw;
+  border-bottom: solid 1px #ccc;
   margin: 0 1em;
+  padding-bottom: 1em;
+
+  @media (min-width: 1024px) {
+    border: 0;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
 }
 
 article {
   border-bottom: solid 1px #ccc;
-  margin: 1em 0;
+  margin: 0 0 1em;
 
   &:last-child {
     border: 0;
   }
+
+  h1, h2, p {
+    max-width: 80ch;
+  }
 }
 
-.post h1 {
+.post h2, .post h1 {
   margin: 0;
   font-size: 1.5rem;
   color: black;
+
+
+}
+
+.post a {
+  color: var(--primary-color);
 }
 
 .post .responsive {
@@ -64,16 +101,23 @@ article {
   margin-top: 1em;
 }
 
-.post .tags {
+.tags {
   margin: 5px 0;
-}
 
-.post .tags a {
-  padding: 3px 10px 8px;
-  background: #888;
-  border-radius: 15px;
-  font-size: smaller;
-  color: white;
+  a {
+    padding: 3px 10px 5px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    font-size: smaller;
+    color: white;
+    line-height: 2.2;
+    white-space: nowrap;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .post time {

@@ -8,31 +8,26 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
+        {{> header }}
         <main>
-            {{> header }}
-            <section>
-                <article id="{{this._id}}" class="post">
-                    {{#if date}}
-                        <time datetime="{{this.data}}">{{date}}</time>
-                    {{/if}}
-                    <h1>{{title}}</h1>
-                    {{#if tags}}
-                        <div class="tags">
-                            {{#each tags}}
-                                <a href="/tag/{{this}}">{{this}}</a>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                    <div class="content">
-                        {{{content}}}
+            <article id="{{this._id}}" class="post">
+                {{#if date}}
+                    <time datetime="{{this.data}}">{{date}}</time>
+                {{/if}}
+                <h1>{{title}}</h1>
+                {{#if tags}}
+                    <div class="tags">
+                        {{#each tags}}
+                            <a href="/tag/{{this}}">{{this}}</a>
+                        {{/each}}
                     </div>
-                </article>
-            </section>
-            {{> footer }}
+                {{/if}}
+                <div class="content">
+                    {{{content}}}
+                </div>
+            </article>
         </main>
-        <script>
-            console.log('Hello World');
-        </script>
+        {{> footer }}
     </body>
 </html>
 

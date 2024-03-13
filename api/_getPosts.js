@@ -38,9 +38,21 @@ export default async (req, collection) => {
         query.permission = { $ne: 'private' }
     }
 
-    console.log(query);
 
     const data = await collection.find(query).sort({'date': -1}).toArray();
+
+    const getAllTags = async() => {
+        const docs = await collection.find().toArray();
+        const allTags = [];
+        docs.forEach(item => {
+            item.tags.forEach(tag => {
+                if (!allTags.includes(tag)) {
+                    allTags.push(tag);
+                }
+            })
+        });
+        return allTags;
+    }
 
     if (req.query.response === 'json') {
         return data;
@@ -64,7 +76,8 @@ export default async (req, collection) => {
 
         const compiledTemplate = getTemplate('listing.hbs');
         const markup = compiledTemplate({
-            posts: data
+            posts: data,
+            tags: await getAllTags()
         });
 
         return markup;
