@@ -45,11 +45,13 @@ export default async (req, collection) => {
         const docs = await collection.find().toArray();
         const allTags = [];
         docs.forEach(item => {
-            item.tags.forEach(tag => {
-                if (!allTags.includes(tag)) {
-                    allTags.push(tag);
-                }
-            })
+            if (item.tags) {
+                item.tags.forEach(tag => {
+                    if (!allTags.includes(tag)) {
+                        allTags.push(tag);
+                    }
+                });
+            }
         });
         return allTags;
     }
