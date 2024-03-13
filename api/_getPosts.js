@@ -42,7 +42,7 @@ export default async (req, collection) => {
     const data = await collection.find(query).sort({'date': -1}).toArray();
 
     const getAllTags = async() => {
-        const docs = await collection.find().toArray();
+        const docs = await collection.find({ permission: { $ne: 'private' }}).toArray();
         const allTags = [];
         docs.forEach(item => {
             if (item.tags) {
