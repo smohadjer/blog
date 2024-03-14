@@ -1,23 +1,6 @@
 import { marked } from 'marked';
-import path from 'path';
-import fs from 'fs';
-import Handlebars from 'handlebars';
-
-function getTemplate(filename) {
-    const pathHbs = path.join(process.cwd(), 'templates', filename);
-    const footerHbs = path.join(process.cwd(), 'templates', 'footer.hbs');
-    const headerHbs = path.join(process.cwd(), 'templates', 'header.hbs');
-    console.log('template: ', pathHbs);
-    const template = fs.readFileSync(pathHbs, 'utf8');
-
-    const footer = fs.readFileSync(footerHbs, 'utf8');
-    const header = fs.readFileSync(headerHbs, 'utf8');
-    Handlebars.registerPartial('footer', footer);
-    Handlebars.registerPartial('header', header);
-
-    const compiledTemplate = Handlebars.compile(template);
-    return compiledTemplate;
-}
+import getTags from './_getTags.js';
+import getTemplate from './_getTemplate.js';
 
 export default async (req, collection) => {
     const slug = req.query.slug;
@@ -38,23 +21,7 @@ export default async (req, collection) => {
         query.permission = { $ne: 'private' }
     }
 
-
     const data = await collection.find(query).sort({'date': -1}).toArray();
-
-    const getAllTags = async() => {
-        const docs = await collection.find({ permission: { $ne: 'private' }}).toArray();
-        const allTags = [];
-        docs.forEach(item => {
-            if (item.tags) {
-                item.tags.forEach(tag => {
-                    if (!allTags.includes(tag)) {
-                        allTags.push(tag);
-                    }
-                });
-            }
-        });
-        return allTags;
-    }
 
     if (req.query.response === 'json') {
         return data;
@@ -79,7 +46,7 @@ export default async (req, collection) => {
         const compiledTemplate = getTemplate('listing.hbs');
         const markup = compiledTemplate({
             posts: data,
-            tags: await getAllTags()
+            tags: await getTags(collection)
         });
 
         return markup;
