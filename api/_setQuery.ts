@@ -1,5 +1,11 @@
+type Query = {
+    slug?: string;
+    tags?: string;
+    permission?: {};
+}
+
 export default function setQuery(slug, tag, permission) {
-    const query = {};
+    const query: Query = {};
 
     if (slug) {
         query.slug = slug;

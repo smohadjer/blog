@@ -1,7 +1,32 @@
 import { ObjectId } from 'mongodb';
 
-export default async (req, collection) => {
-    const document = {
+type Document = {
+  date: string;
+  title: string;
+  slug: string;
+  content: string;
+  summary?: string;
+  permission?: string;
+  tags?: string[];
+}
+
+type RequestBody = {
+  date: string;
+  title: string;
+  slug: string;
+  content: string;
+  summary: string;
+  permission: string;
+  tags: string;
+  post_id: string;
+}
+
+type Request = {
+  body: RequestBody;
+}
+
+export default async (req: Request, collection) => {
+    const document: Document = {
       date: req.body.date,
       title: req.body.title.trim(),
       slug: req.body.slug.trim().replace('.html', ''),

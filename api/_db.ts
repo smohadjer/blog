@@ -1,9 +1,12 @@
 import dotenv from 'dotenv';
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 dotenv.config();
 
 const uri =  process.env.development === 'true' ? process.env.db_uri_local : process.env.db_uri_remote;
-const client = new MongoClient(uri);
+const client = uri ? new MongoClient(uri) : undefined;
 
 export default client;
+
+
+
