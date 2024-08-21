@@ -1,6 +1,8 @@
 import client from './_db.js';
 import getPosts from './_getPosts.js';
 import insertPost from './_insertPost.js';
+import getTags from './_getTags.js';
+import getMarkup from './_getMarkup.js';
 
 export default async (req, res) => {
     try {
@@ -16,7 +18,9 @@ export default async (req, res) => {
                 res.json(posts);
             } else {
                 res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                res.end(posts);
+                const tags = await getTags(collection);
+                const markup = getMarkup(posts, tags, req);
+                res.end(markup);
             }
         }
 
