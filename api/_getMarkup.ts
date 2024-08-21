@@ -3,7 +3,7 @@ import { marked } from 'marked';
 
 export default (posts, tags, req) => {
     // detail page
-    if (req.body.slug && req.body.slug.length > 0) {
+    if (req.query.slug && req.query.slug.length > 0) {
         posts.map((item) => {
             item.content = marked.parse(item.content);
         });
