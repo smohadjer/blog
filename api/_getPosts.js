@@ -1,26 +1,13 @@
 import { marked } from 'marked';
 import getTags from './_getTags.js';
 import getTemplate from './_getTemplate.js';
+import setQuery from './_setQuery.js';
 
 export default async (req, collection) => {
     const slug = req.query.slug;
     const tag = req.query.tag;
     const permission = req.query.permission;
-    const query = {};
-
-    if (slug) {
-        query.slug = slug;
-    } else if (tag) {
-        query.tags = tag;
-        if (!permission) {
-            query.permission = { $ne: 'private' }
-        }
-    } else if (!permission) {
-        /* if no permission parameter is sent with request we only show
-        posts that are not marked as private */
-        query.permission = { $ne: 'private' }
-    }
-
+    const query = setQuery(slug, tag, permission);
     const data = await collection.find(query).sort({'date': -1}).toArray();
 
     if (req.query.response === 'json') {

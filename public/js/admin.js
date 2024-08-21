@@ -7,10 +7,13 @@ function init(form) {
     const dateField = form.querySelector('input[name=date]');
     dateField.value = getDateAsIsoString(new Date());
 
-    document.querySelector('input[type=reset]').addEventListener('click', (e) => {
-        console.log(e);
+    form.querySelector('input[type=reset]').addEventListener('click', (e) => {
         resetForm(form);
     });
+
+    const slugField = form.querySelector('#slug');
+    const titleField = form.querySelector('#title');
+    populateSlug(titleField, slugField);
 }
 
 // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
@@ -76,3 +79,19 @@ function populateForm(post_id, form, posts) {
     const inputElm = new DOMParser().parseFromString(input, 'text/html').body.firstChild;
     form.append(inputElm);
 }
+
+// populate slug field from title field
+function populateSlug(titleField, slugField) {
+    const setSlug = (value) => {
+        const normalizedValue = value.trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9\ ]/g, '')
+            .replace(/\ /g, '-');
+        slugField.value = normalizedValue;
+    };
+
+    titleField.addEventListener('keyup', (event) => {
+        setSlug(event.target.value);
+    });
+}
+
