@@ -8,7 +8,12 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        {{> header }}
+        <header>
+            <div class="logo"><a href="/">Blog</a></div>
+            <nav>
+                <a href="/admin">Admin</a>
+            </nav>
+        </header>
         <div class="flex">
             <aside>
                 <h1>Filter by tags</h1>
@@ -39,7 +44,9 @@
                 {{/each}}
             </main>
         </div>
-        {{> footer }}
+        <footer>
+            Add footer here...
+        </footer>
     </body>
 </html>
 
