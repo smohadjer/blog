@@ -1,0 +1,24 @@
+// get all blog posts
+GET http://localhost:3000/
+
+###
+
+// get all blog posts as json data
+GET http://localhost:3000?response=json
+
+###
+
+// get all blog posts including private posts as json data
+GET http://localhost:3000?response=json&permission=all
+
+###
+
+// deleting a post
+DELETE http://localhost:3000
+content-type: application/json
+
+{
+    "post_id": "66c59199d998c1bc406e580e"
+}
+
+###
