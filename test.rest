@@ -4,7 +4,7 @@ GET http://localhost:3000/
 ###
 
 // get all blog posts as json data
-GET http://localhost:3000?response=json
+GET http://localhost:3000/api/blog?response=json
 
 ###
 
@@ -13,12 +13,9 @@ GET http://localhost:3000?response=json&permission=all
 
 ###
 
-// deleting a post
-DELETE http://localhost:3000
-content-type: application/json
+// deleting a blog post using post id
+DELETE http://localhost:3000/api/blog/66c6fe7051e859e751932f0e
 
-{
-    "post_id": "66c59199d998c1bc406e580e"
-}
+{}
 
 ###

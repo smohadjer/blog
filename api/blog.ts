@@ -21,6 +21,7 @@ type Request = {
     method: string;
     query: {
         response: string;
+        post_id?: string;
     };
 }
 
@@ -58,11 +59,11 @@ export default async (req: Request, res) => {
         }
 
         if (req.method === 'DELETE') {
-            const query = {_id: new ObjectId(req.body.post_id)};
-            const doc = await collection.find(query).toArray();
-            const deleteResult = await collection.deleteOne(doc[0]);
+            console.log('deleting...', req.query.post_id);
+            const query = {_id: new ObjectId(req.query.post_id)};
+            const result = await collection.deleteOne(query);
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.send(`<p>Deleted ${deleteResult.deletedCount} documents!</p`);
+            res.send(`<p>Deleted ${result.deletedCount} documents!</p`);
         }
     } catch (e) {
         console.error(e);

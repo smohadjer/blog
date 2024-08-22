@@ -11,6 +11,10 @@
       {
         "source": "/",
         "destination": "/api/blog"
+      },
+      {
+        "source": "/api/blog/:post_id",
+        "destination": "/api/blog"
       }
     ],
     "cleanUrls": true
