@@ -116,17 +116,19 @@ function resetForm(form: HTMLFormElement) {
 }
 
 function populateForm(post_id: string, form: HTMLFormElement, posts: Post[]) {
-    console.log('populating form...')
+    console.log('populating form...', post_id, posts);
     const post: Post | undefined = posts.find(post => post._id === post_id);
     if (post === undefined) return;
     const formFields = form.querySelectorAll('input, textarea');
     formFields.forEach((input) => {
         const fieldName = input.getAttribute('name')!;
-        if (post[fieldName] && input instanceof HTMLInputElement) {
-            if (input.getAttribute('type') === 'checkbox') {
+        if (post[fieldName]) {
+            if (input.getAttribute('type') === 'checkbox' && input instanceof HTMLInputElement) {
                 input.checked = true;
             } else {
-                input.value = post[fieldName];
+                if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+                    input.value = post[fieldName];
+                }
             }
         }
     });
