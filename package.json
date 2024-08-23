@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "vercel dev"
+    "dev-start": "npm run build -- --watch=forever & vercel dev",
+    "build": "esbuild public/ts/*.ts --outdir=public/js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "mongodb": "6.5"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "esbuild": "^0.19.12"
   }
 }
