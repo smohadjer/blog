@@ -8,41 +8,57 @@ const fetchPosts = async () => {
     }
 };
 
-init(document.querySelector('form'));
-
-async function init(form) {
-    const posts = await fetchPosts();
-    if (posts) {
-        const select = document.querySelector('select');
-        populateSelect(select, posts);
-        select.addEventListener('change', (e) => {
-            resetForm(form);
-            populateForm(e.target.value, form, posts);
-        });
-    }
-
+const setDateField = (form) => {
     // set date field in form to today's date
     const dateField = form.querySelector('input[name=date]');
     dateField.value = getDateAsIsoString(new Date());
+};
+
+init(document.querySelector('form'));
+
+
+async function init(form) {
+    const posts = await fetchPosts();
+    const select = document.querySelector('select');
+
+    if (posts) {
+        populateSelect(select, posts);
+        select.addEventListener('change', (e) => {
+            console.log('change fired on select, value = ', e.target.value.length);
+            resetForm(form);
+
+            if (e.target.value.length > 0) {
+                populateForm(e.target.value, form, posts);
+            }
+        });
+    }
+
+    setDateField(form);
 
     form.querySelector('input[type=reset]').addEventListener('click', (e) => {
+        e.preventDefault();
+        resetSelect(select);
         resetForm(form);
     });
 
     // click handler for delete button
     form.querySelector('#delete').addEventListener('click', (e) => {
         e.preventDefault();
+        e.target.setAttribute('disabled', 'disabled');
         const postId = form.querySelector('input[name=post_id]').value;
         const endpoint = form.getAttribute('action') + '/' + postId;
         console.log(endpoint);
         fetch(endpoint, {
             method: 'DELETE',
             body: JSON.stringify({})
-        }).then(() => {
-            console.log('deleted blog post!');
-        }).catch((err) => {
-            console.error(err);
-        });
+        })
+            .then((response) => response.text())
+            .then((resText) => {
+                console.log('deleted blog post!', resText);
+                window.location.reload();
+            }).catch((err) => {
+                console.error(err);
+            });
     });
 
     const slugField = form.querySelector('#slug');
@@ -69,24 +85,24 @@ function populateSelect(select, posts) {
     document.querySelector('.loading').remove();
 }
 
+function resetSelect(select) {
+    select.querySelectorAll('option')[0].selected = true;
+}
+
 function resetForm(form) {
+    console.log('reseting the form...')
     const inputField = form.querySelector('input[name=post_id]');
     if (inputField) {
         inputField.remove();
     }
 
     form.querySelector('#delete').setAttribute('disabled', 'disabled');
-
     form.reset();
 
-    // set date field in form to today's date
-    const dateField = form.querySelector('input[name=date]');
-    dateField.value = getDateAsIsoString(new Date());
+    setDateField(form);
 }
 
 function populateForm(post_id, form, posts) {
-    if (post_id.length === 0) return;
-
     const post = posts.find(post => post._id === post_id);
     const formFields = form.querySelectorAll('input, textarea');
     formFields.forEach((input) => {
@@ -122,4 +138,3 @@ function populateSlug(titleField, slugField) {
         setSlug(event.target.value);
     });
 }
-
