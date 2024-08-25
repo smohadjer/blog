@@ -6,9 +6,7 @@ type Tag = {
     count: number;
 }
 
-const allTags: Tag[] = [];
-
-const addTag = (tag: string) => {
+const addTag = (tag: string, allTags: Tag[]) => {
     const foundItem = allTags.find(item => item.label === tag);
     if (foundItem) {
         foundItem.count += 1;
@@ -21,6 +19,7 @@ const addTag = (tag: string) => {
 }
 
 export default async (collection) => {
+    const allTags: Tag[] = [];
     const docs = await collection.find({
         permission: { $ne: 'private' }
     }).toArray();
@@ -28,7 +27,7 @@ export default async (collection) => {
     docs.forEach((doc: Document) => {
         if (doc.tags) {
             doc.tags.forEach((tag) => {
-                addTag(tag);
+                addTag(tag, allTags);
             });
         }
     });
